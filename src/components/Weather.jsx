@@ -29,14 +29,14 @@ export default function Weather({ weather }) {
   return (
     <WeatherContainer color={backgroundColor}>
       <Content>
-        <City>{city}</City>
+        <CityName>{city}</CityName>
         <TemperatureInformation>
           <TemperatureMaxMin>Mínima: {temp_min}°C</TemperatureMaxMin>
           <TemperatureMaxMin>Máxima: {temp_max}°C</TemperatureMaxMin>
         </TemperatureInformation>
       </Content>
       <WeatherInformation>
-        <Weather>{weather_now_pt}</Weather>
+        <WeatherConditionNow>{weather_now_pt}</WeatherConditionNow>
         <Temperature>{temp_now}°C</Temperature>
       </WeatherInformation>
     </WeatherContainer>
@@ -90,7 +90,7 @@ const Content = styled.div`
   }
 `;
 
-const City = styled.h1`
+const CityName = styled.h1`
   color: white;
   font-size: 20px;
   font-weight: 600;
@@ -122,7 +122,7 @@ const WeatherInformation = styled.span`
   align-items: flex-end;
 `;
 
-const Weather = styled.h3`
+const WeatherConditionNow = styled.h3`
   color: white;
   font-size: 19px;
   font-family: 'Calibri', sans-serif;

@@ -29,16 +29,16 @@ export default function Weather({ weather }) {
   return (
     <WeatherContainer color={backgroundColor}>
       <Content>
-        <CityName>{city}</CityName>
-        <TemperatureInfo>
-          <TemperatureLabel>Mínima: {temp_min}°C</TemperatureLabel>
-          <TemperatureLabel>Máxima: {temp_max}°C</TemperatureLabel>
-        </TemperatureInfo>
+        <City>{city}</City>
+        <TemperatureInformation>
+          <TemperatureMaxMin>Mínima: {temp_min}°C</TemperatureMaxMin>
+          <TemperatureMaxMin>Máxima: {temp_max}°C</TemperatureMaxMin>
+        </TemperatureInformation>
       </Content>
-      <WeatherInfo>
-        <WeatherCondition>{weather_now_pt}</WeatherCondition>
+      <WeatherInformation>
+        <Weather>{weather_now_pt}</Weather>
         <Temperature>{temp_now}°C</Temperature>
-      </WeatherInfo>
+      </WeatherInformation>
     </WeatherContainer>
   );
 }
@@ -90,7 +90,7 @@ const Content = styled.div`
   }
 `;
 
-const CityName = styled.h1`
+const City = styled.h1`
   color: white;
   font-size: 20px;
   font-weight: 600;
@@ -101,12 +101,12 @@ const CityName = styled.h1`
   }
 `;
 
-const TemperatureInfo = styled.div`
+const TemperatureInformation = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const TemperatureLabel = styled.h2`
+const TemperatureMaxMin = styled.h2`
   color: white;
   font-size: 19px;
   font-family: 'Calibri', sans-serif;
@@ -116,13 +116,13 @@ const TemperatureLabel = styled.h2`
   }
 `;
 
-const WeatherInfo = styled.span`
+const WeatherInformation = styled.span`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 `;
 
-const WeatherCondition = styled.h3`
+const Weather = styled.h3`
   color: white;
   font-size: 19px;
   font-family: 'Calibri', sans-serif;

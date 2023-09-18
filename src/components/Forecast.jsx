@@ -32,7 +32,7 @@ export default function Forecast({ forecast: { list } }) {
           <Line type="monotone" dataKey="temp" stroke="#FF8826" activeDot={{ r: 8 }} />
         </LineChart>
       </ChartWrapper>
-      <ForecastHeading>Previsão a cada 3 horas para os próximos dias (°C)</ForecastHeading>
+      <ForecastH>Previsão a cada 3 horas para os próximos dias (°C)</ForecastH>
     </ForecastContainer>
   );
 }
@@ -60,7 +60,7 @@ const ChartWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const ForecastHeading = styled.h2`
+const ForecastH = styled.h2`
   font-family: 'Nunito Sans', sans-serif;
   font-size: 20px;
   font-weight: 600;

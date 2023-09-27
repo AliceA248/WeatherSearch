@@ -46,15 +46,16 @@ export default function Search() {
         fetchForecastData(city, API_key),
       ]);
 
+      if (!weatherResponse.name) {
+        setError("Cidade não encontrada. Por favor, digite um nome de cidade existente.");
+        return;
+      }
+
       setWeather(weatherResponse);
       setForecast(forecastResponse);
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        setError("Cidade não encontrada. Por favor, digite um nome de cidade existente.");
-      } else {
-        setError("Ocorreu um erro ao buscar os dados meteorológicos. Tente novamente mais tarde.");
-        console.error('Error data', error);
-      }
+      setError("Ocorreu um erro ao buscar os dados meteorológicos. Tente novamente mais tarde.");
+      console.error('Error data', error);
     }
   };
 
@@ -76,6 +77,7 @@ export default function Search() {
     </Body>
   );
 }
+
 
 const Body = styled.div`
   display: flex;

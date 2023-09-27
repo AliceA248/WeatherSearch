@@ -4,42 +4,58 @@ import styled from "styled-components";
 import Weather from "./Weather";
 import Forecast from "./Forecast";
 
+const fetchWeatherData = async (city, API_key) => {
+  try {
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_key}&units=metric`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const fetchForecastData = async (city, API_key) => {
+  try {
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_key}&units=metric`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export default function Search() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
   const [forecast, setForecast] = useState({});
+  const [error, setError] = useState(null);
   const API_key = import.meta.env.VITE_API_KEY;
 
   const handleSearch = async () => {
-    if (!city) return;
+    if (!city) {
+      setError("Por favor, digite o nome da cidade.");
+      return;
+    }
 
     try {
+      setError(null);
       const [weatherResponse, forecastResponse] = await Promise.all([
         fetchWeatherData(city, API_key),
         fetchForecastData(city, API_key),
       ]);
 
-      setWeather(weatherResponse.data);
-      setForecast(forecastResponse.data);
+      setWeather(weatherResponse);
+      setForecast(forecastResponse);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("Cidade não encontrada. Por favor, digite um nome de cidade existente.");
+        setError("Cidade não encontrada. Por favor, digite um nome de cidade existente.");
       } else {
-        console.error('Error fetching data', error);
+        setError("Ocorreu um erro ao buscar os dados meteorológicos. Tente novamente mais tarde.");
+        console.error('Error data', error);
       }
     }
-  };
-
-  const fetchWeatherData = async (city, API_key) => {
-    return axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_key}&units=metric`
-    );
-  };
-
-  const fetchForecastData = async (city, API_key) => {
-    return axios.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_key}&units=metric`
-    );
   };
 
   return (
@@ -54,6 +70,7 @@ export default function Search() {
         />
         <SearchButton onClick={handleSearch}>Buscar</SearchButton>
       </SearchContainer>
+      {error && <ErrorText>{error}</ErrorText>}
       <Weather weather={weather} />
       <Forecast forecast={forecast} />
     </Body>

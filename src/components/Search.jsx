@@ -78,7 +78,6 @@ export default function Search() {
   );
 }
 
-
 const Body = styled.div`
   display: flex;
   flex-direction: column;
